@@ -54,7 +54,7 @@ while(choice !== 0)
             if (trip === null) // if trip still null then the path isn't found
             {
                 console.log("path not found");
-                break;
+                break; // the reuested trip doesn't exist  so it will stop the operation
             }
             if (trip.availableSeats > 0)
             {
@@ -66,9 +66,9 @@ while(choice !== 0)
                 console.log("place full");
                 break;
             }
-            let seatNumber = 1;
-            let j = 0;
-            while (j < tickets.length) // this for the tickets how many tickets are there already
+            let seatNumber = 1; 
+            let j = 0; // checking from the beegining of tickets arrays
+            while (j < tickets.length) // check while there aree still tickets to examine (that exists)
             {
                 if (tickets[j].tripId === trip.id) //We only count tickets that belong to the same trip.
                 {
@@ -91,7 +91,7 @@ while(choice !== 0)
             console.log("ticket bought with success");
             break; 
 
-        case 3:
+        
           case 3:
     if (tickets.length === 0)
     {
@@ -107,18 +107,18 @@ while(choice !== 0)
     {
         let ticket = tickets[ticketIndex];
 
-        let tripIndex = 0;
-        let tripticket = null;
+        let tripsIndex = 0;
+        let tripticket = null; // the one that has the trips object
 
-        while (tripIndex < trips.length) // check if there are still trips to check
+        while (tripsIndex < trips.length) // check if there are still trips to check
         {
-            if (trips[tripIndex].id === ticket.tripId) // does the currect trip's ID equal the ticket's trip ID
+            if (trips[tripsIndex].id === ticket.tripId) // does the currect trip's ID equal the ticket's trip ID
             {
-                tripticket = trips[tripIndex];
+                tripticket = trips[tripsIndex];
                 break;
             }
 
-            tripIndex++;
+            tripsIndex++;
         }
 
         console.log("Ticket #" + ticket.id);
@@ -159,12 +159,46 @@ while(choice !== 0)
                     tripIndex++
                 } 
                 tickets.splice(ticketindex,1);
-                trips[tripIndex].availableSeats--;
-                console.log("ticket found");
+                trips[tripIndex].availableSeats++;
+                console.log("ticket cancelled successfully");
             break;
 
         case 5:
-                console.log();
+                let passengerNAME = prompt("passenger name : ");
+                let ticketiindex = 0;
+                let found = false;
+                while(ticketiindex < tickets.length)
+                {
+                    if(tickets[ticketiindex].passengerName === passengerNAME )
+                    {
+                        found = true;
+                        let ticket = tickets[ticketiindex];
+                        let tripIndex = 0;
+                        let trip =  null;
+                        while(tripIndex < trips.length)
+                        {
+                            if (trips[tripIndex].id === ticket.tripId)
+                            {
+                                trip = trips[tripIndex];
+                                break;
+                            }
+                            tripIndex++;
+                        }
+                         console.log("Ticket #" + ticket.id);
+            console.log("Passager : " + ticket.passengerName);
+            console.log("Trajet : " + trip.departure + " → " + trip.destination);
+            console.log("Place : " + ticket.seatNumber);
+            console.log("Prix : " + ticket.price + " DH");
+            console.log("");
+                    }
+                    ticketiindex++;
+
+                }
+                if (found == flase )
+                {
+                    console.log("no ticket was found");
+                }
+                break;
 
         default:
         
