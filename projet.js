@@ -22,7 +22,7 @@ while(choice !== 0)
     switch (choice) {
         case 1:
              console.log("=== TRAJETS DISPONIBLES ===");
-            while(let i = 0; i<trips.length;i++)
+            for(let i = 0; i<trips.length;i++)
             {
             console.log("#" + trips[i].id + " " + trips[i].departure + " → " + trips[i].destination);
             console.log("Départ : " + trips[i].departureTime);
@@ -187,7 +187,7 @@ while(choice !== 0)
                     ticketiindex++;
 
                 }
-                if (found == false )
+                if (found === false )
                 {
                     console.log("no ticket was found");
                 }
@@ -209,9 +209,9 @@ while(choice !== 0)
                     }
                     tripiindex++;
                 }
-                if (foundd == false )
+                if (foundd === false )
                 {
-                    console.log("not path was found");
+                    console.log("no trip was found");
                 }
                     break;
             case 7:
