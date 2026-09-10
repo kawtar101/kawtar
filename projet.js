@@ -194,7 +194,7 @@ while(choice !== 0)
                     ticketiindex++;
 
                 }
-                if (found == flase )
+                if (found == false )
                 {
                     console.log("no ticket was found");
                 }
@@ -203,14 +203,14 @@ while(choice !== 0)
                 let departurecityy = prompt("enter the city : ");
                 let tripiindex = 0;
                 let foundd = false;
-                while(trips[tripiindex] < trips.length) 
+                while(tripiindex < trips.length) 
                 {
                     if(trips[tripiindex].departure == departurecityy)
                     {
-                        found = true;
+                        foundd = true;
                         console.log(
                             trips[tripiindex].departure + " → " +
-                            trips[tripiindex].destination + " → " + 
+                            trips[tripiindex].destination + ":"
                             trips[tripiindex].price + "DH"
                         );
                     }
@@ -226,7 +226,7 @@ while(choice !== 0)
                 while(round < trips.length - 1)
                 {
                     let j = 0;
-                    while(j > trips.length - round - 1)
+                    while(j < trips.length - round - 1)
                     {
                         if (trips[j].price > trips[j + 1].price)
                         {
@@ -242,12 +242,13 @@ while(choice !== 0)
                  round = 0; 
                  while(round < trips.length)
                  {
-                     console.log(trips[i].departure + " → " + trips[i].destination + " : " + trips[i].price + " DH"); 
+                     console.log(trips[round].departure + " → " + trips[round].destination + " : " + trips[i].price + " DH"); 
                      round++; 
                     } 
                     break; 
                     
                 default:
-
+                }
+}
 
                 
