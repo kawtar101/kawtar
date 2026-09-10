@@ -22,8 +22,7 @@ while(choice !== 0)
     switch (choice) {
         case 1:
              console.log("=== TRAJETS DISPONIBLES ===");
-            let i = 0 ;
-            while(i < trips.length)
+            while(let i = 0; i<trips.length;i++)
             {
             console.log("#" + trips[i].id + " " + trips[i].departure + " → " + trips[i].destination);
             console.log("Départ : " + trips[i].departureTime);
@@ -31,25 +30,21 @@ while(choice !== 0)
             console.log("Prix : " + trips[i].price + " DH");
             console.log("Places disponibles : " + trips[i].availableSeats);
             console.log("");
-            i++;   
             }
                 break;
              case 2:
     
             let passengername = prompt ("passanger name");
             let tripId = Number(prompt ("path identifier : "));
-            let tripindex = 0;
             let trip = null;
 
-           while (tripindex < trips.length)   // 1 research if the path correspondant 
+           for (let tripindex = 0;tripindex < trips.length; tripindex++)    
            {
                 if (trips[tripindex].id === tripId) // check the the ID enterd by the user and compare it with the trips _((trips[tripindex].id))_
                  {
                     trip = trips[tripindex];
                     break; 
                 }
-           
-            tripindex++;
            }
             if (trip === null) // if trip still null then the path isn't found
             {
@@ -132,21 +127,21 @@ while(choice !== 0)
 
         case 4:
          let ticketID = Number(prompt("ticket's identifier : "));
-         let ticketindex = 0;
+         let ticketindex ;
         
-            while(ticketindex < tickets.length)
+           for (ticketindex = 0; ticketindex < tickets.length;ticketindex++)
+           {
+            if(tickets[ticketindex].id === ticketID)
             {
-                if (tickets[ticketindex].id === ticketID)
-                {
-                   break;
-                }
-                ticketindex++;
+                break;
             }
+           }
             if(ticketindex === tickets.length)
             {
                 console.log("ticket not found.");
                 break;
             }
+            
             let tripIndex = 0;
             while(tripIndex < trips.length)
                 {
