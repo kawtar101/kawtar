@@ -199,8 +199,55 @@ while(choice !== 0)
                     console.log("no ticket was found");
                 }
                 break;
+            case 6 :
+                let departurecityy = prompt("enter the city : ");
+                let tripiindex = 0;
+                let foundd = false;
+                while(trips[tripiindex] < trips.length) 
+                {
+                    if(trips[tripiindex].departure == departurecityy)
+                    {
+                        found = true;
+                        console.log(
+                            trips[tripiindex].departure + " → " +
+                            trips[tripiindex].destination + " → " + 
+                            trips[tripiindex].price + "DH"
+                        );
+                    }
+                    tripiindex++;
+                }
+                if (found == false )
+                {
+                    console.log("not path was found");
+                }
+                    break;
+            case 7:
+                let round = 0;
+                while(round < trips.length - 1)
+                {
+                    let j = 0;
+                    while(j > trips.length - round - 1)
+                    {
+                        if (trips[j].price > trips[j + 1].price)
+                        {
+                            let swap = trips[j];
+                            trips[j] = trips[j+1];
+                            trips[j + 1] = swap;
+                        }
+                        j++;
+                    }
+                    round++;
+                }
+                console.log("++++++++++ ");
+                 round = 0; 
+                 while(round < trips.length)
+                 {
+                     console.log(trips[i].departure + " → " + trips[i].destination + " : " + trips[i].price + " DH"); 
+                     round++; 
+                    } 
+                    break; 
+                    
+                default:
 
-        default:
-        
 
-}
+                
