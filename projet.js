@@ -1,6 +1,6 @@
 const prompt = require('prompt-sync')();
 const trips = require("./data.js");
-console.log(trips);
+
 
 let choice  = 1;
 const tickets = [];
@@ -37,13 +37,13 @@ while(choice !== 0)
              case 2:
     
             let passengername = prompt ("passanger name");
-            let tripID = Number(prompt ("trajet identifier"));
+            let tripId = Number(prompt ("path identifier : "));
             let tripindex = 0;
             let trip = null;
 
            while (tripindex < trips.length)   // 1 research if the path correspondant 
            {
-                if (trips[tripindex].id === tripID) // check the the ID enterd by the user and compare it with the trips _((trips[tripindex].id))_
+                if (trips[tripindex].id === tripId) // check the the ID enterd by the user and compare it with the trips _((trips[tripindex].id))_
                  {
                     trip = trips[tripindex];
                     break; 
@@ -58,12 +58,12 @@ while(choice !== 0)
             }
             if (trip.availableSeats > 0)
             {
-                console.log("place found");
+                console.log("train found");
                 
             }
             else 
             {
-                console.log("place full");
+                console.log("train full");
                 break;
             }
             let seatNumber = 1; 
@@ -108,25 +108,23 @@ while(choice !== 0)
         let ticket = tickets[ticketIndex];
 
         let tripsIndex = 0;
-        let tripticket = null; // the one that has the trips object
+        let tripticket = null; 
 
-        while (tripsIndex < trips.length) // check if there are still trips to check
+        while (tripsIndex < trips.length) 
         {
-            if (trips[tripsIndex].id === ticket.tripId) // does the currect trip's ID equal the ticket's trip ID
+            if (trips[tripsIndex].id === ticket.tripId) 
             {
                 tripticket = trips[tripsIndex];
                 break;
             }
-
             tripsIndex++;
         }
 
         console.log("Ticket #" + ticket.id);
         console.log("Passanger : " + ticket.passengerName);
         console.log("path : " + tripticket.departure + " → " + tripticket.destination);
-        console.log("Place : " + ticket.seatNumber);
+        console.log("seatnumber: " + ticket.seatNumber);
         console.log("Price : " + ticket.price + " DH");
-
         ticketIndex++;
     }
 
@@ -185,11 +183,11 @@ while(choice !== 0)
                             tripIndex++;
                         }
                          console.log("Ticket #" + ticket.id);
-            console.log("Passager : " + ticket.passengerName);
-            console.log("Trajet : " + trip.departure + " → " + trip.destination);
-            console.log("Place : " + ticket.seatNumber);
-            console.log("Prix : " + ticket.price + " DH");
-            console.log("");
+                         console.log("Passager : " + ticket.passengerName);
+                           console.log("Trajet : " + trip.departure + " → " + trip.destination);
+                              console.log("Place : " + ticket.seatNumber);
+                          console.log("Prix : " + ticket.price + " DH");
+                              console.log("");
                     }
                     ticketiindex++;
 
@@ -210,13 +208,13 @@ while(choice !== 0)
                         foundd = true;
                         console.log(
                             trips[tripiindex].departure + " → " +
-                            trips[tripiindex].destination + ":"
+                            trips[tripiindex].destination + ":" +
                             trips[tripiindex].price + "DH"
                         );
                     }
                     tripiindex++;
                 }
-                if (found == false )
+                if (foundd == false )
                 {
                     console.log("not path was found");
                 }
@@ -242,7 +240,7 @@ while(choice !== 0)
                  round = 0; 
                  while(round < trips.length)
                  {
-                     console.log(trips[round].departure + " → " + trips[round].destination + " : " + trips[i].price + " DH"); 
+                     console.log(trips[round].departure + " → " + trips[round].destination + " : " + trips[round].price + " DH"); 
                      round++; 
                     } 
                     break; 
@@ -250,5 +248,3 @@ while(choice !== 0)
                 default:
                 }
 }
-
-                
