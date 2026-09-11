@@ -3,7 +3,26 @@ const trips = require("./data.js");
 
 
 let choice  = 1;
-const tickets = [];
+const tickets = [
+    { id: 1, passengerName: "Ahmed", tripId: 1, seatNumber: 1, price: 25 },
+    { id: 2, passengerName: "Fatima", tripId: 1, seatNumber: 2, price: 25 },
+    { id: 3, passengerName: "Youssef", tripId: 2, seatNumber: 1, price: 30 },
+    { id: 4, passengerName: "Ayoub", tripId: 3, seatNumber: 1, price: 90 },
+    { id: 5, passengerName: "Sanae", tripId: 3, seatNumber: 2, price: 90 },
+    { id: 6, passengerName: "Omar", tripId: 3, seatNumber: 3, price: 90 },
+    { id: 7, passengerName: "Khadija", tripId: 4, seatNumber: 1, price: 120 },
+    { id: 8, passengerName: "Mehdi", tripId: 4, seatNumber: 2, price: 120 },
+    { id: 9, passengerName: "Salma", tripId: 4, seatNumber: 3, price: 120 },
+    { id: 10, passengerName: "Hamza", tripId: 4, seatNumber: 4, price: 120 }
+];
+
+for(let ticket of tickets){
+    for(let trip of trips){
+        if(trip.id === ticket.tripId){
+            trip.availableSeats--;
+        }
+    }
+}
 let nexticketidperson= 1;
 function displaytrips(trips)
 {
@@ -204,16 +223,17 @@ function filterthepaths(trips)
 function sorttrips(trips)
 {
     let round = 0;
-    while(round < trips.length - 1)
+    let copy = [...trips];
+    while(round < copy.length - 1)
     {
             let j = 0;
-            while(j < trips.length - round - 1)
+            while(j < copy.length - round - 1)
             {
-                if (trips[j].price > trips[j + 1].price)
+                if (copy[j].price > copy[j + 1].price)
                 {
-                    let swap = trips[j];
-                    trips[j] = trips[j+1];
-                    trips[j + 1] = swap;
+                    let swap = copy[j];
+                    copy[j] = copy[j+1];
+                    copy[j + 1] = swap;
                 }
                 j++;
             }
@@ -223,7 +243,7 @@ function sorttrips(trips)
     round = 0; 
     while(round < trips.length)
     {
-        console.log(trips[round].departure + " → " + trips[round].destination + " : " + trips[round].price + " DH"); 
+        console.log(copy[round].departure + " → " + copy[round].destination + " : " + copy[round].price + " DH"); 
         round++; 
     } 
 }
