@@ -5,23 +5,9 @@ const trips = require("./data.js");
 let choice  = 1;
 const tickets = [];
 let nexticketidperson= 1;
-while(choice !== 0)
+function displaytrips(trips)
 {
-    console.log ("=================================");
-    console.log("RAILWAY MANAGER");
-    console.log("=================================");
-     console.log("1. Display trips");
-    console.log("2. Buy a ticket");
-    console.log("3. Display tickets");
-    console.log("4. Cancel a ticket");
-    console.log("5. Search for a ticket");
-    console.log("6. Filter trips");
-    console.log("7. Sort trips");
-    console.log("0. Exit");
-    choice = Number(prompt("choose your option : "))
-    switch (choice) {
-        case 1:
-             console.log("=== TRAJETS DISPONIBLES ===");
+      console.log("=== TRAJETS DISPONIBLES ===");
             for(let i = 0; i<trips.length;i++)
             {
             console.log("#" + trips[i].id + " " + trips[i].departure + " → " + trips[i].destination);
@@ -31,10 +17,10 @@ while(choice !== 0)
             console.log("Places disponibles : " + trips[i].availableSeats);
             console.log("");
             }
-                break;
-             case 2:
-    
-            let passengername = prompt ("passanger name");
+}
+function buytickets(trips,tickets)
+{
+     let passengername = prompt ("passanger name");
             let tripId = Number(prompt ("path identifier : "));
             let trip = null;
 
@@ -46,10 +32,11 @@ while(choice !== 0)
                     break; 
                 }
            }
-            if (trip === null) // if trip still null then the path isn't found
+            if (trip === null) 
             {
                 console.log("path not found");
-                break; // the reuested trip doesn't exist  so it will stop the operation
+                return;
+               
             }
             if (trip.availableSeats > 0)
             {
@@ -59,13 +46,13 @@ while(choice !== 0)
             else 
             {
                 console.log("train full");
-                break;
+                return;
             }
             let seatNumber = 1; 
-            let j = 0; // checking from the beegining of tickets arrays
-            while (j < tickets.length) // check while there aree still tickets to examine (that exists)
+            let j = 0; 
+            while (j < tickets.length)  
             {
-                if (tickets[j].tripId === trip.id) //We only count tickets that belong to the same trip.
+                if (tickets[j].tripId === trip.id) 
                 {
                     seatNumber++;
                 }
@@ -80,18 +67,18 @@ while(choice !== 0)
                 seatNumber : seatNumber,
                 price :trip.price
             };
+
             trip.availableSeats--;
             tickets.push(newticket);
             nexticketidperson++;
             console.log("ticket bought with success");
-            break; 
-
-        
-          case 3:
+}
+function displaytickets(tickets,trips)
+{
     if (tickets.length === 0)
     {
         console.log("no ticket was saved");
-        break;
+        return;
     }
 
     console.log("=== TICKETS ===");
@@ -121,12 +108,11 @@ while(choice !== 0)
         console.log("seatnumber: " + ticket.seatNumber);
         console.log("Price : " + ticket.price + " DH");
         ticketIndex++;
-    }
-
-    break;
-
-        case 4:
-         let ticketID = Number(prompt("ticket's identifier : "));
+    } 
+}
+function cacelticket(tickets,trips)
+{
+     let ticketID = Number(prompt("ticket's identifier : "));
          let ticketindex ;
         
            for (ticketindex = 0; ticketindex < tickets.length;ticketindex++)
@@ -139,7 +125,7 @@ while(choice !== 0)
             if(ticketindex === tickets.length)
             {
                 console.log("ticket not found.");
-                break;
+                return;
             }
             
             let tripIndex = 0;
@@ -154,11 +140,11 @@ while(choice !== 0)
                 tickets.splice(ticketindex,1);
                 trips[tripIndex].availableSeats++;
                 console.log("ticket cancelled successfully");
-            break;
-
-        case 5:
-                let passengerNAME = prompt("passenger name : ");
-                let ticketiindex = 0;
+}
+function searchforaticket(tickets,trips)
+{
+     let passengerNAME = prompt("passenger name : ");
+    let ticketiindex = 0;
                 let found = false;
                 while(ticketiindex < tickets.length)
                 {
@@ -191,14 +177,15 @@ while(choice !== 0)
                 {
                     console.log("no ticket was found");
                 }
-                break;
-            case 6 :
-                let departurecityy = prompt("enter the city : ");
+}
+function filterthepaths(trips)
+{
+        let departurecityy = prompt("enter the city : ");
                 let tripiindex = 0;
                 let foundd = false;
                 while(tripiindex < trips.length) 
                 {
-                    if(trips[tripiindex].departure == departurecityy)
+                    if(trips[tripiindex].departure === departurecityy)
                     {
                         foundd = true;
                         console.log(
@@ -213,9 +200,10 @@ while(choice !== 0)
                 {
                     console.log("no trip was found");
                 }
-                    break;
-            case 7:
-                let round = 0;
+}
+function sorttrips(trips)
+{
+      let round = 0;
                 while(round < trips.length - 1)
                 {
                     let j = 0;
@@ -238,6 +226,45 @@ while(choice !== 0)
                      console.log(trips[round].departure + " → " + trips[round].destination + " : " + trips[round].price + " DH"); 
                      round++; 
                     } 
+}
+while(choice !== 0)
+{
+    console.log ("=================================");
+    console.log("RAILWAY MANAGER");
+    console.log("=================================");
+     console.log("1. Display trips");
+    console.log("2. Buy a ticket");
+    console.log("3. Display tickets");
+    console.log("4. Cancel a ticket");
+    console.log("5. Search for a ticket");
+    console.log("6. Filter trips");
+    console.log("7. Sort trips");
+    console.log("0. Exit");
+    choice = Number(prompt("choose your option : "))
+    switch (choice) {
+        case 1:
+            displaytrips(trips);
+                break;
+             case 2:
+            buytickets(trips,tickets);
+            break;
+        
+          case 3:
+        displaytickets(tickets,trips);
+        break;
+
+        case 4:
+        cacelticket(tickets,trips);
+        break;
+
+        case 5:
+            searchforaticket(tickets,trips);
+                break;
+            case 6 :
+              filterthepaths(trips);
+                    break;
+            case 7:
+            sorttrips(trips);
                     break; 
                     
                 default:
