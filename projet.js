@@ -286,6 +286,8 @@ while(choice !== 0)
             case 7:
             sorttrips(trips);
                     break; 
+            case 8:
+            
                     
                 default:
                 }
