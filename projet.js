@@ -3,6 +3,7 @@ const trips = require("./data.js");
 
 
 let choice  = 1;
+let nexticketidperson= 11;
 const tickets = [
     { id: 1, passengerName: "Ahmed", tripId: 1, seatNumber: 1, price: 25 },
     { id: 2, passengerName: "Fatima", tripId: 1, seatNumber: 2, price: 25 },
@@ -23,7 +24,6 @@ for(let ticket of tickets){
         }
     }
 }
-let nexticketidperson= 1;
 function displaytrips(trips)
 {
       console.log("=== TRAJETS DISPONIBLES ===");
@@ -204,7 +204,7 @@ function filterthepaths(trips)
         let foundd = false;
         while(tripiindex < trips.length) 
         {
-                    if(trips[tripiindex].departure === departurecityy)
+                    if(trips[tripiindex].departure.toLowerCase() === departurecityy.toLowerCase() )
                     {
                         foundd = true;
                         console.log(
